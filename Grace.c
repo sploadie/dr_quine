@@ -1,63 +1,9 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-/*
-	This program will print its own source when run.
-*/
-void	dprintquote(int fd, char **lines, int i)
-{
-	dprintf(fd, lines[16], 34, lines[i], 34, 44, 10);
-}
-int		main()
-{
-	int		i;
-	char	*lines[] = {
-		"Grace_kid.c",
-		"%s%c",
-		"#include <stdio.h>",
-		"#include <fcntl.h>",
-		"#include <unistd.h>",
-		"/*",
-		"	This program will print its own source when run.",
-		"*/",
-		"void	dprintquote(int fd, char **lines, int i)",
-		"{",
-		"	dprintf(fd, lines[16], 34, lines[i], 34, 44, 10);",
-		"}",
-		"int		main()",
-		"{",
-		"	int		i;",
-		"	char	*lines[] = {",
-		"		%c%s%c%c%c",
-		"	};",
-		"/*",
-		"	Loops below write file",
-		"*/",
-		"	int fd = open(lines[0], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);",
-		"	if (fd == -1)",
-		"		return (1);",
-		"	for(i = 2; i < 16; i++)",
-		"		dprintf(fd, lines[1], lines[i], 10);",
-		"	for(i = 0; i < 33; i++)",
-		"		dprintquote(fd, lines, i);",
-		"	for(i = 17; i < 33; i++)",
-		"		dprintf(fd, lines[1], lines[i], 10);",
-		"	close(fd);",
-		"	return (0);",
-		"}",
-	};
-/*
-	Loops below write file
-*/
-	int fd = open(lines[0], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-	if (fd == -1)
-		return (1);
-	for(i = 2; i < 16; i++)
-		dprintf(fd, lines[1], lines[i], 10);
-	for(i = 0; i < 33; i++)
-		dprintquote(fd, lines, i);
-	for(i = 17; i < 33; i++)
-		dprintf(fd, lines[1], lines[i], 10);
-	close(fd);
-	return (0);
-}
+#define MAKE_LINE char*s="#include <stdio.h>%c#include <fcntl.h>%c#include <unistd.h>%c#define MAKE_LINE char*s=%c%s%c;%c#define GET_FILE int fd = open(%cGrace_kid.c%c, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);if (fd == -1){return (1);}%c%c#define FT int main(void){MAKE_LINE GET_FILE dprintf(fd,s,10,10,10,34,s,34,10,34,34,10,10,10,10,10);}%c%cFT%c";
+#define GET_FILE int fd = open("Grace_kid.c", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);if (fd == -1){return (1);}
+
+#define FT int main(void){MAKE_LINE GET_FILE dprintf(fd,s,10,10,10,34,s,34,10,34,34,10,10,10,10,10);}
+
+FT
