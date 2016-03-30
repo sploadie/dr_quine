@@ -1,4 +1,4 @@
-# include <stdio.h>
+#include <stdio.h>
 /*
 	This program will print its own source when run.
 */
@@ -11,7 +11,7 @@ int		main()
 	int		i;
 	char	*lines[] = {
 		"%s%c",
-		"# include <stdio.h>",
+		"#include <stdio.h>",
 		"/*",
 		"	This program will print its own source when run.",
 		"*/",
