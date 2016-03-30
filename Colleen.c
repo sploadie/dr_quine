@@ -26,7 +26,7 @@ int		main()
 		"		%c%s%c%c%c",
 		"	};",
 		"/*",
-		"	Loops below write file",
+		"	Loops below output file",
 		"*/",
 		"	for(i = 1; i < 13; i++)",
 		"		printf(lines[0], lines[i], 10);",
@@ -38,7 +38,7 @@ int		main()
 		"}",
 	};
 /*
-	Loops below write file
+	Loops below output file
 */
 	for(i = 1; i < 13; i++)
 		printf(lines[0], lines[i], 10);
